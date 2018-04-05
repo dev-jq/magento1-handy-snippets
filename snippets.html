@@ -12,3 +12,11 @@
 
 - Url to specific page
 <?php echo $this->getUrl('blog');?>
+
+- Get product attribute and its label:
+<?php if($_product->getData('CODE_NAME')): ?>
+      <div class="attribute-label">
+          <span class="attribute-text"><?php echo $_product->getResource()->getAttribute('CODE_NAME')->getStoreLabel().' '.$_product->getAttributeText('CODE_NAME'); ?></span>
+      </div>
+<?php endif; ?>
+
