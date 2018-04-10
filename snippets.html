@@ -20,3 +20,27 @@
       </div>
 <?php endif; ?>
 
+- Call cms block in template:
+<?php if($this->getLayout()->createBlock('cms/block')->setBlockId('CODE_NAME')->toHtml() !== ''): ?>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('CODE_NAME')->toHtml() ?>
+<?php endif;?>
+
+- Call cms via xml
+<block type="core/template" template="page/footer/links.phtml" name="NAME">
+    <action method="setBlockId">
+       <block_id>NAME</block_id>
+    </action>
+/block>
+<?php /* links.phtml */
+$block = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getStoreId())->load($this->getBlockId());
+$html = $block->getContent();
+<?php if ($html) : //this is needed to avoid additional markup if the cms block is empty ?>
+	<?php $filter = Mage::helper('cms')->getPageTemplateProcessor();?>
+    <div>
+        <h2><?php echo $block->getTitle() ?></h2>
+        <?php echo $filter->filter($html) ?>
+    </div>
+<?php endif;?>
+
+
+
