@@ -12,6 +12,8 @@
 
 - Url to specific page
 <?php echo $this->getUrl('blog');?>
+- Url without slash at the end:
+<?php echo $this->getUrl('', array('_direct'=>'adres.html')); ?>
 
 - Get product attribute and its label:
 <?php if($_product->getData('CODE_NAME')): ?>
