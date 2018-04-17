@@ -43,6 +43,33 @@ $html = $block->getContent();
         <?php echo $filter->filter($html) ?>
     </div>
 <?php endif;?>
+	
+- get product rating: count and stars:
+<?php
+    $_product = Mage::registry('current_product');
+    $storeId = Mage::app()->getStore()->getId();
+    $summaryData = Mage::getModel('review/review_summary')->setStoreId($storeId)->load($_product->getId());
+    $reviewcount = $summaryData['reviews_count'];
+?> 
+<div class="summary">
+	<div class="ratings">
+	    <div class="rating-box">
+		<div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%;">
+		</div>
+	    </div>
+	</div>
+	<div class="ratings-count">
+	    <span class="text">
+		<?php if($reviewcount == 1): ?>
+		    <?php echo $reviewcount; ?> <?php echo $this->__('opinia klienta') ?>
+		<?php elseif($reviewcount > 1 && $reviewcount < 5): ?>
+		    <?php echo $reviewcount; ?> <?php echo $this->__('opinie klientów') ?>
+		<?php elseif($reviewcount >= 5 ): ?>
+		    <?php echo $reviewcount; ?> <?php echo $this->__('opinii klientów') ?>
+		<?php endif; ?>
+	    </span>
+	</div>
+    </div>
 
 
 
