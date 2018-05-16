@@ -71,5 +71,8 @@ $html = $block->getContent();
 	</div>
     </div>
 
-
-
+- get attribute code of filters (catalog/layer/view.phtml) in foreach ($_filters as $_filter):
+<?php $filterCode = $_filter->getAttributeModel()->getAttributeCode() ?>
+<?php if ($filterCode == "code_name"): ?>
+//do something
+<?php endif; ?>
